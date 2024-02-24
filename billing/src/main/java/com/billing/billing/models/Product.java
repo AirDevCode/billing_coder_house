@@ -17,7 +17,7 @@ public class Product {
     @Column
     @Getter
     @Setter
-    private String productCode;
+    private String product_code;
 
     @Column
     @Getter
@@ -33,4 +33,9 @@ public class Product {
     @Getter
     @Setter
     private String description;
+
+    @Column
+    @Getter
+    @Setter
+    private int stock;
 }

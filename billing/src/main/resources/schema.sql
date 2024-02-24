@@ -1,20 +1,21 @@
 DROP TABLE IF EXISTS clients;
 CREATE TABLE clients (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    documentType VARCHAR(255),
+    document_type VARCHAR(255),
     document VARCHAR(255),
     name VARCHAR(255),
-    lastName VARCHAR(255),
+    last_name VARCHAR(255),
     email VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    productCode VARCHAR(255),
+    product_code VARCHAR(255),
     name VARCHAR(255),
     price DECIMAL(10, 2),
-    description TEXT
+    description TEXT,
+    stock INT
 );
 
 

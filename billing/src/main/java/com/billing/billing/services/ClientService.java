@@ -31,15 +31,24 @@ public class ClientService {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (optionalClient.isPresent()) {
             Client existingClient = optionalClient.get();
-            existingClient.setDocumentType(client.getDocumentType());
+            existingClient.setDocument_type(client.getDocument_type());
             existingClient.setDocument(client.getDocument());
             existingClient.setName(client.getName());
-            existingClient.setLastName(client.getLastName());
+            existingClient.setLast_name(client.getLast_name());
             existingClient.setEmail(client.getEmail());
             return clientRepository.save(existingClient);
         } else {
             // Handle client not found
             return null;
         }
+    }
+
+    public Client getClientById(Long id) {
+        Optional<Client> optionalClient = clientRepository.findById(id);
+        return optionalClient.orElse(null);
+    }
+
+    public void deleteClientById(Long id) {
+        clientRepository.deleteById(id);
     }
 }

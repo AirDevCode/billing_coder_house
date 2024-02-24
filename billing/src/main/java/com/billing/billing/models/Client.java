@@ -17,7 +17,7 @@ public class Client {
     @Column
     @Getter
     @Setter
-    private String documentType;
+    private String document_type;
 
     @Column
     @Getter
@@ -32,7 +32,7 @@ public class Client {
     @Column
     @Getter
     @Setter
-    private String lastName;
+    private String last_name;
 
     @Column
     @Getter
