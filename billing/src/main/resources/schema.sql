@@ -13,7 +13,7 @@ CREATE TABLE products (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     product_code VARCHAR(255),
     name VARCHAR(255),
-    price DECIMAL(10, 2),
+    price DOUBLE,
     description TEXT,
     stock INT
 );
@@ -24,13 +24,15 @@ CREATE TABLE sales (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     date DATE,
     client_id BIGINT,
-    salevalue DOUBLE,
+    sale_value DOUBLE,
+    total DOUBLE,
+    total_products INT,
     FOREIGN KEY (client_id) REFERENCES clients(id)
 );
 
 
-DROP TABLE IF EXISTS salesDetail;
-CREATE TABLE salesDetail (
+DROP TABLE IF EXISTS sales_detail;
+CREATE TABLE sales_detail (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     sale_id BIGINT,
     product_id BIGINT,

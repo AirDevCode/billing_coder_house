@@ -29,6 +29,16 @@ public class Sale {
     @JoinColumn
     @Getter
     @Setter
-    private double salevalue;
+    private double sale_value;
+
+    @Column
+    @Getter
+    @Setter
+    private double total;
+
+    @Column
+    @Getter
+    @Setter
+    private int total_products;
 
 }
