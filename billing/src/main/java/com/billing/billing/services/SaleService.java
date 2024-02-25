@@ -1,4 +1,5 @@
 package com.billing.billing.services;
+
 import com.billing.billing.models.Sale;
 import com.billing.billing.repositories.*;
 
@@ -19,6 +20,7 @@ import com.billing.billing.repositories.SaleRepository;
 import com.billing.billing.requests.*;
 import com.billing.billing.responses.*;
 import com.billing.billing.repositories.SaleDetailRepository;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class SaleService {
@@ -27,14 +29,16 @@ public class SaleService {
     private final ProductRepository productRepository;
     private final SaleRepository saleRepository;
     private final SaleDetailRepository saleDetailRepository;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public SaleService(ClientRepository clientRepository, ProductRepository productRepository, 
-                       SaleRepository saleRepository, SaleDetailRepository saleDetailRepository) {
+    public SaleService(ClientRepository clientRepository, ProductRepository productRepository,
+            SaleRepository saleRepository, SaleDetailRepository saleDetailRepository, RestTemplate restTemplate) {
         this.clientRepository = clientRepository;
         this.productRepository = productRepository;
         this.saleRepository = saleRepository;
         this.saleDetailRepository = saleDetailRepository;
+        this.restTemplate = restTemplate;
     }
 
     @Transactional
@@ -108,23 +112,50 @@ public class SaleService {
 
     private SalesResponse buildSaleResponse(Sale sale, List<SaleDetail> saleDetails, Client client) {
         SalesResponse saleResponse = new SalesResponse();
+        java.sql.Date sqlDate = new java.sql.Date(sale.getDate().getTime());
+        saleResponse.setDate(sqlDate);
         saleResponse.setSaleId(sale.getId());
         saleResponse.setTotal(sale.getTotal());
         saleResponse.setTotalProducts(sale.getTotal_products());
         saleResponse.setClientName(client.getName());
         saleResponse.setClientEmail(client.getEmail());
 
-         List<Product> products = new ArrayList<>();
-         for (SaleDetail saleDetail : saleDetails) {
-             Product product = saleDetail.getProduct();
-             products.add(product);
-         }
-         saleResponse.setProducts(products);
+        List<Product> products = new ArrayList<>();
+        for (SaleDetail saleDetail : saleDetails) {
+            Product product = saleDetail.getProduct();
+            products.add(product);
+        }
+        saleResponse.setProducts(products);
 
         return saleResponse;
     }
 
-    private Date getCurrentDate() {
+    public Date getCurrentDate() {
+        try {
+            String url = "http://worldclockapi.com/api/json/utc/now";
+            WorldClockResponse response = restTemplate.getForObject(url, WorldClockResponse.class);
+            if (response != null && response.getCurrentDateTime() != null) {
+                return response.getCurrentDateTime();
+            }
+        } catch (Exception e) {
+            // Manejar la excepción, puedes registrarla o lanzarla nuevamente según tu caso
+            // de uso
+            e.printStackTrace();
+        }
+        // Si la solicitud al servicio falla o la respuesta no contiene la fecha,
+        // devuelve la fecha actual local
         return new Date();
+    }
+
+    private static class WorldClockResponse {
+        private Date currentDateTime;
+
+        public Date getCurrentDateTime() {
+            return currentDateTime;
+        }
+
+        public void setCurrentDateTime(Date currentDateTime) {
+            this.currentDateTime = currentDateTime;
+        }
     }
 }

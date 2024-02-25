@@ -1,5 +1,6 @@
 package com.billing.billing.responses;
 
+import java.sql.Date;
 import java.util.List;
 import com.billing.billing.models.Client;
 import com.billing.billing.models.Product;
@@ -12,6 +13,7 @@ public class SalesResponse {
     private int totalProducts;
     private String clientName;
     private String clientEmail;
+    private Date saleDate;
 
 
     public SalesResponse() {
@@ -47,6 +49,14 @@ public class SalesResponse {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public void setDate(Date saleDate) {
+        this.saleDate = saleDate;
+    }
+
+    public Date getDate() {
+        return saleDate;
     }
 
     public int getTotalProducts() {
