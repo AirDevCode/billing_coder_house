@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "e97bc576-9fdc-44f2-9336-a64d73d0f3c7",
+		"name": "billing_coderhouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8632970"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Crear Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_type\":\"CC\",\n    \"document\": \"10332039203\",\n    \"name\": \"Carla Maria\",\n    \"lastname\": \"Gallardo Galeano\",\n    \"email\": \"laumejia@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/clients",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_type\":\"CC\",\n    \"document\": \"10332039203\",\n    \"name\": \"Carla Maria\",\n    \"last_name\": \"Gallardo Galeano\",\n    \"email\": \"laumejia@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/clients/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cliente por Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/clients/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cliente por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/clients/6",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"clients",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/clients",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Crear Producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_code\": \"982392\",\n    \"name\": \"Case Deluxe\",\n    \"price\": \"29000\",\n    \"description\": \"Case para iPhone 14 pro max\",\n    \"stock\": 25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/products",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_code\": \"982392\",\n    \"name\": \"Case Deluxe\",\n    \"price\": \"29000\",\n    \"description\": \"Case para iPhone 14 pro max\",\n    \"stock\": 25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/products/6",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"products",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener producto por Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener productos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/products",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar producto por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales",
+			"item": [
+				{
+					"name": "Comprobante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cliente\": {\n        \"clienteId\": 1\n    },\n    \"lineas\": [\n        {\n            \"cantidad\": 1,\n            \"producto\": {\n                \"productId\": 1\n            }\n        },\n        {\n            \"cantidad\": 3,\n            \"producto\": {\n                \"productId\": 2\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/sales",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
