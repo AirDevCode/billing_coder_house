@@ -14,13 +14,11 @@ import java.util.Date;
 import com.billing.billing.models.Client;
 import com.billing.billing.models.Product;
 import com.billing.billing.models.SaleDetail;
-import com.billing.billing.repositories.ClientRepository;
-import com.billing.billing.repositories.ProductRepository;
-import com.billing.billing.repositories.SaleRepository;
 import com.billing.billing.requests.*;
 import com.billing.billing.responses.*;
 import com.billing.billing.repositories.SaleDetailRepository;
 import org.springframework.web.client.RestTemplate;
+import java.text.DecimalFormat;
 
 @Service
 public class SaleService {
@@ -49,7 +47,8 @@ public class SaleService {
             throw new IllegalArgumentException("El cliente especificado no existe");
         }
 
-        // Obtener la fecha actual
+        // Obtener la fecha actual a través de un servicio - si este falla devuelve la
+        // fecha con el objeto Date
         Date date = getCurrentDate();
 
         // Calcular el precio total de la venta y la cantidad total de productos
@@ -115,11 +114,22 @@ public class SaleService {
         java.sql.Date sqlDate = new java.sql.Date(sale.getDate().getTime());
         saleResponse.setDate(sqlDate);
         saleResponse.setSaleId(sale.getId());
-        saleResponse.setTotal(sale.getTotal());
-        saleResponse.setTotalProducts(sale.getTotal_products());
-        saleResponse.setClientName(client.getName());
-        saleResponse.setClientEmail(client.getEmail());
 
+        DecimalFormat df = new DecimalFormat("#.0");
+        String formattedTotal = df.format(sale.getTotal());
+        saleResponse.setTotal(Double.parseDouble(formattedTotal));
+
+        saleResponse.setTotalProducts(sale.getTotal_products());
+
+        // Información del cliente
+        ClientResponse clientResponse = new ClientResponse();
+        clientResponse.setId(client.getId());
+        clientResponse.setNombre(client.getName());
+        clientResponse.setApellido(client.getLast_name());
+        clientResponse.setEmail(client.getEmail());
+        saleResponse.setClient(clientResponse);
+
+        // Información de los productos
         List<Product> products = new ArrayList<>();
         for (SaleDetail saleDetail : saleDetails) {
             Product product = saleDetail.getProduct();
@@ -138,8 +148,6 @@ public class SaleService {
                 return response.getCurrentDateTime();
             }
         } catch (Exception e) {
-            // Manejar la excepción, puedes registrarla o lanzarla nuevamente según tu caso
-            // de uso
             e.printStackTrace();
         }
         // Si la solicitud al servicio falla o la respuesta no contiene la fecha,
@@ -152,10 +160,6 @@ public class SaleService {
 
         public Date getCurrentDateTime() {
             return currentDateTime;
-        }
-
-        public void setCurrentDateTime(Date currentDateTime) {
-            this.currentDateTime = currentDateTime;
         }
     }
 }

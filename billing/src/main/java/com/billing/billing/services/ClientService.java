@@ -38,7 +38,6 @@ public class ClientService {
             existingClient.setEmail(client.getEmail());
             return clientRepository.save(existingClient);
         } else {
-            // Handle client not found
             return null;
         }
     }

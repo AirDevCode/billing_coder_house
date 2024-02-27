@@ -38,7 +38,6 @@ public class ProductService {
             existingProduct.setStock(product.getStock());
             return productRepository.save(existingProduct);
         } else {
-            // Handle client not found
             return null;
         }
     }

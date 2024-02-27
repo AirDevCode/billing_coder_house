@@ -15,28 +15,27 @@ import com.billing.billing.responses.SalesResponse;
 @RestController
 @RequestMapping("/sales")
 public class SaleController {
-    
+
     private final SaleService saleService;
 
-  @Autowired
+    @Autowired
     public SaleController(SaleService saleService) {
         this.saleService = saleService;
     }
 
-
-@GetMapping
-public String index(){
-    return "conectado";
-}
-
-@PostMapping
-public ResponseEntity<Object> createSale(@RequestBody SaleRequest saleRequest) {
-    try {
-        SalesResponse sale = saleService.createSale(saleRequest);
-        return ResponseEntity.ok(sale);
-    } catch (Exception e) {
-        return ResponseEntity.badRequest().body("Error al crear la venta: " + e.getMessage());
+    @GetMapping
+    public String index() {
+        return "conectado";
     }
-} 
+
+    @PostMapping
+    public ResponseEntity<Object> createSale(@RequestBody SaleRequest saleRequest) {
+        try {
+            SalesResponse sale = saleService.createSale(saleRequest);
+            return ResponseEntity.ok(sale);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al crear la venta: " + e.getMessage());
+        }
+    }
 
 }
